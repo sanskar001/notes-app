@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useLayoutEffect } from "react";
 import { View, StyleSheet } from "react-native";
 import {
   useFonts,
@@ -8,6 +8,7 @@ import {
   Inter_700Bold,
 } from "@expo-google-fonts/inter";
 import * as SplashScreen from "expo-splash-screen";
+import { StatusBar } from "expo-status-bar";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -31,7 +32,8 @@ export default function withFontLoad(WrappedComponent: React.FC) {
     }
 
     return (
-      <View style={styles.container} onLayout={onLayoutRootView}>
+      <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
+        <StatusBar style="auto" />
         <WrappedComponent />
       </View>
     );
@@ -39,11 +41,3 @@ export default function withFontLoad(WrappedComponent: React.FC) {
 
   return WithFontComponent;
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-});
