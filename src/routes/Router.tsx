@@ -26,11 +26,11 @@ const HomeScreen: React.FC = () => {
         component={NoteScreen}
         options={{
           tabBarLabel: "Notes",
-          tabBarIcon: ({ focused, size, color }) => (
+          tabBarIcon: ({ focused, size }) => (
             <Icon
               name={focused ? "document-text" : "document-text-outline"}
+              color={theme.colors.text}
               size={size}
-              color={color}
             />
           ),
         }}
@@ -39,11 +39,11 @@ const HomeScreen: React.FC = () => {
         name="Todos"
         component={TodoScreen}
         options={{
-          tabBarIcon: ({ focused, size, color }) => (
+          tabBarIcon: ({ focused, size }) => (
             <Icon
               name={focused ? "bag-check" : "bag-check-outline"}
+              color={theme.colors.text}
               size={size}
-              color={color}
             />
           ),
         }}

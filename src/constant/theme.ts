@@ -4,7 +4,7 @@ import { colors } from "./colors";
 export const darkTheme: Theme = {
   dark: true,
   colors: {
-    primary: colors.white,
+    primary: colors.black,
     background: colors.black,
     card: colors.gray,
     text: colors.white,
@@ -16,11 +16,11 @@ export const darkTheme: Theme = {
 export const lightTheme: Theme = {
   dark: false,
   colors: {
-    primary: colors.black,
+    primary: colors.white,
     background: colors.paperWhite,
     card: colors.gray,
     text: colors.black,
-    border: colors.gray,
+    border: colors.lightGray,
     notification: colors.primary,
   },
 };
