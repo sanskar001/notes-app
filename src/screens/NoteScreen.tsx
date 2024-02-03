@@ -1,16 +1,26 @@
 import React from "react";
+import { useTheme } from "@react-navigation/native";
 import { View, Text, StyleSheet } from "react-native";
 
-interface NoteScreenProps {}
+const NoteScreen: React.FC = () => {
+  const { colors } = useTheme();
 
-const NoteScreen: React.FC<NoteScreenProps> = ({}) => {
   return (
-    <View>
-      <Text>NoteScreen</Text>
+    <View style={[styles.screen, { backgroundColor: colors.background }]}>
+      <Text style={[styles.title, { color: colors.text }]}>All notes</Text>
     </View>
   );
 };
 
 export default NoteScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+    paddingHorizontal: 16,
+  },
+  title: {
+    fontSize: 42,
+    fontFamily: "Inter_500",
+  },
+});

@@ -1,11 +1,11 @@
-import React, { useCallback, useLayoutEffect } from "react";
-import { View, StyleSheet } from "react-native";
+import React, { useCallback } from "react";
+import { View } from "react-native";
 import {
   useFonts,
   Inter_300Light,
   Inter_400Regular,
   Inter_500Medium,
-  Inter_700Bold,
+  Inter_600SemiBold,
 } from "@expo-google-fonts/inter";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
@@ -18,7 +18,7 @@ export default function withFontLoad(WrappedComponent: React.FC) {
       Inter_300: Inter_300Light,
       Inter_400: Inter_400Regular,
       Inter_500: Inter_500Medium,
-      Inter_700: Inter_700Bold,
+      Inter_600: Inter_600SemiBold,
     });
 
     const onLayoutRootView = useCallback(async () => {
