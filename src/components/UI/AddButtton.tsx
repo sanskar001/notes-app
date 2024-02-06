@@ -50,16 +50,16 @@ const AddButtton: React.FC<AddButttonProps> = ({ onPress }) => {
   };
 
   return (
-    <Pressable
-      onPress={onPress}
-      onPressIn={pressInHandler}
-      onPressOut={pressOutHandler}
-      style={styles.button}
-    >
-      <Animated.View style={[styles.buttonContent, { transform: [{ scale }] }]}>
+    <Animated.View style={[styles.button, { transform: [{ scale }] }]}>
+      <Pressable
+        style={styles.buttonContent}
+        onPress={onPress}
+        onPressIn={pressInHandler}
+        onPressOut={pressOutHandler}
+      >
         <Icon name="add" size={32} color={colors.white} />
-      </Animated.View>
-    </Pressable>
+      </Pressable>
+    </Animated.View>
   );
 };
 
@@ -70,6 +70,12 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 24,
     right: 24,
+    elevation: 4,
+    shadowColor: colors.black,
+    shadowOpacity: 0.1,
+    shadowOffset: { width: 0, height: 0 },
+    borderRadius: 50,
+    transform: [{ scale: 1 }],
   },
   buttonContent: {
     width: 64,
@@ -78,6 +84,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: colors.primary,
-    transform: [{ scale: 1 }],
   },
 });

@@ -5,4 +5,5 @@ export const colors = {
   paperWhite: "#f2f2f2",
   gray: "#2e2e2e",
   lightGray: "#aaaaaa",
+  cloudGray: "#d8d8d866",
 };

@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { useTheme } from "@react-navigation/native";
 import { View, Text, StyleSheet } from "react-native";
 import AddButtton from "@UI/AddButtton";
-import CustomBottomSheetModal from "@components/UI/BottomSheetModal";
+import CustomBottomSheetModal from "@/components/UI/CustomBottomSheetModal";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import NewTodo from "@/components/Todo/NewTodo";
 
@@ -25,6 +25,7 @@ const TodoScreen: React.FC = () => {
       <CustomBottomSheetModal
         snapPoint={"25%"}
         ref={bottomSheetModalRef}
+        title="New To-Do"
         dismissModal={dismissModalHandler}
       >
         <NewTodo />
