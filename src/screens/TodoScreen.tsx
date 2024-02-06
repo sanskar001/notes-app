@@ -1,5 +1,5 @@
-import React, { useRef } from "react";
-import { useTheme } from "@react-navigation/native";
+import React, { useCallback, useRef } from "react";
+import { useFocusEffect, useTheme } from "@react-navigation/native";
 import { View, Text, StyleSheet } from "react-native";
 import AddButtton from "@UI/AddButtton";
 import CustomBottomSheetModal from "@/components/UI/CustomBottomSheetModal";
@@ -18,6 +18,14 @@ const TodoScreen: React.FC = () => {
   const dismissModalHandler = () => {
     bottomSheetModalRef.current?.dismiss();
   };
+
+  useFocusEffect(
+    useCallback(() => {
+      return () => {
+        bottomSheetModalRef.current?.dismiss();
+      };
+    }, [])
+  );
 
   return (
     <View style={[styles.screen, { backgroundColor: colors.background }]}>
