@@ -1,7 +1,13 @@
 import { Theme } from "@react-navigation/native";
 import { colors } from "./colors";
 
-export const darkTheme: Theme = {
+export type CustomTheme = Theme & {
+  colors: {
+    // background2: string;
+  };
+};
+
+export const darkTheme: CustomTheme = {
   dark: true,
   colors: {
     primary: colors.black,
@@ -13,12 +19,12 @@ export const darkTheme: Theme = {
   },
 };
 
-export const lightTheme: Theme = {
+export const lightTheme: CustomTheme = {
   dark: false,
   colors: {
     primary: colors.white,
     background: colors.paperWhite,
-    card: colors.gray,
+    card: colors.paperWhite,
     text: colors.black,
     border: colors.lightGray,
     notification: colors.primary,

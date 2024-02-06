@@ -18,7 +18,7 @@ const HomeScreen: React.FC = () => {
 
   return (
     <Tab.Navigator
-      initialRouteName="Notes"
+      initialRouteName="Todos"
       screenOptions={setTabNavigatorOptions(theme)}
     >
       <Tab.Screen
