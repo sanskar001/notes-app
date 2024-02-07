@@ -1,14 +1,13 @@
 import React from "react";
-import { NavigationContainer, useTheme } from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import SettingScreen from "@/screens/SettingScreen";
 import NoteScreen from "@/screens/NoteScreen";
 import TodoScreen from "@/screens/TodoScreen";
-import { useColorScheme } from "react-native";
-import Theme from "@/constant/theme";
 import Icon from "react-native-vector-icons/Ionicons";
 import { setTabNavigatorOptions } from "./options";
+import { useTheme } from "@/context/themeContext";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -53,10 +52,8 @@ const HomeScreen: React.FC = () => {
 };
 
 const Router: React.FC = () => {
-  const scheme = useColorScheme();
-
   return (
-    <NavigationContainer theme={scheme === "dark" ? Theme.dark : Theme.light}>
+    <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen
           name="Home"

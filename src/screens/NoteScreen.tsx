@@ -1,7 +1,7 @@
 import React from "react";
-import { useTheme } from "@react-navigation/native";
 import { View, Text, StyleSheet } from "react-native";
 import AddButtton from "@/components/UI/AddButtton";
+import { useTheme } from "@/context/themeContext";
 
 const NoteScreen: React.FC = () => {
   const { colors } = useTheme();

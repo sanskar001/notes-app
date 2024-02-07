@@ -1,5 +1,5 @@
-import { Theme } from "@react-navigation/native";
 import { colors } from "./colors";
+import { Theme } from "@react-navigation/native";
 
 export type CustomTheme = Theme & {
   colors: {

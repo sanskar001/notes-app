@@ -1,10 +1,11 @@
 import React, { useCallback, useRef } from "react";
-import { useFocusEffect, useTheme } from "@react-navigation/native";
+import { useFocusEffect } from "@react-navigation/native";
 import { View, Text, StyleSheet } from "react-native";
-import AddButtton from "@UI/AddButtton";
-import CustomBottomSheetModal from "@/components/UI/CustomBottomSheetModal";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
-import NewTodo from "@/components/Todo/NewTodo";
+import AddButtton from "@UI/AddButtton";
+import CustomBottomSheetModal from "@UI/CustomBottomSheetModal";
+import NewTodo from "@components/Todo/NewTodo";
+import { useTheme } from "@/context/themeContext";
 
 const TodoScreen: React.FC = () => {
   const { colors } = useTheme();

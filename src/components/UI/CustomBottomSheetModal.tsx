@@ -6,8 +6,8 @@ import {
   BottomSheetView,
 } from "@gorhom/bottom-sheet";
 import { StyleSheet, Text, View } from "react-native";
-import { useTheme } from "@react-navigation/native";
 import IconButton from "@UI/IconButton";
+import { useTheme } from "@/context/themeContext";
 
 interface BottomSheetModalProps {
   title: string;
@@ -65,9 +65,7 @@ const CustomBottomSheetModal = React.forwardRef<Ref, BottomSheetModalProps>(
         snapPoints={[snapPoint]}
         backdropComponent={renderBackdrop}
         style={{ padding: 16 }}
-        backgroundStyle={{
-          backgroundColor: colors.card,
-        }}
+        backgroundStyle={{ backgroundColor: colors.card }}
         handleStyle={{ height: 0, padding: 0 }}
         handleIndicatorStyle={{ display: "none" }}
       >
