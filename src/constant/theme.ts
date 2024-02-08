@@ -3,7 +3,8 @@ import { Theme } from "@react-navigation/native";
 
 export type CustomTheme = Theme & {
   colors: {
-    // background2: string;
+    inputBackground: string;
+    placeholderText: string;
   };
 };
 
@@ -16,6 +17,8 @@ export const darkTheme: CustomTheme = {
     text: colors.white,
     border: colors.gray,
     notification: colors.primary,
+    inputBackground: colors.buildingGray,
+    placeholderText: colors.smokePearl,
   },
 };
 
@@ -28,6 +31,8 @@ export const lightTheme: CustomTheme = {
     text: colors.black,
     border: colors.lightGray,
     notification: colors.primary,
+    inputBackground: colors.white,
+    placeholderText: colors.silverback,
   },
 };
 

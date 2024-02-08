@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
   title: {
     flex: 1,
     fontSize: 16,
-    fontFamily: "Inter_600",
+    fontFamily: "Inter_500",
     textAlign: "center",
   },
   rightButton: {
