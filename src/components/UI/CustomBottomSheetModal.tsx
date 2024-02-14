@@ -16,6 +16,7 @@ interface BottomSheetModalProps {
   hasSubmitButtonOnTop?: boolean;
   disabledSubmitButton?: boolean;
   onSubmit?: () => void;
+  onDismiss?: () => void;
   dismissModal: () => void;
 }
 
@@ -31,6 +32,7 @@ const CustomBottomSheetModal = React.forwardRef<Ref, BottomSheetModalProps>(
       disabledSubmitButton = false,
       dismissModal,
       onSubmit,
+      onDismiss,
     },
     ref
   ) => {
@@ -68,6 +70,9 @@ const CustomBottomSheetModal = React.forwardRef<Ref, BottomSheetModalProps>(
         backgroundStyle={{ backgroundColor: colors.card }}
         handleStyle={{ height: 0, padding: 0 }}
         handleIndicatorStyle={{ display: "none" }}
+        keyboardBlurBehavior="restore"
+        enablePanDownToClose
+        onDismiss={onDismiss}
       >
         <BottomSheetView style={styles.header}>
           <IconButton

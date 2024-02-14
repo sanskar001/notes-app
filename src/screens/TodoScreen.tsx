@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { useFocusEffect } from "@react-navigation/native";
 import { View, Text, StyleSheet } from "react-native";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
@@ -9,36 +9,26 @@ import { useTheme } from "@/context/themeContext";
 
 const TodoScreen: React.FC = () => {
   const { colors } = useTheme();
-
-  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
-
-  const openModalHandler = () => {
-    bottomSheetModalRef.current?.present();
-  };
-
-  const dismissModalHandler = () => {
-    bottomSheetModalRef.current?.dismiss();
-  };
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   useFocusEffect(
     useCallback(() => {
-      return () => {
-        bottomSheetModalRef.current?.dismiss();
-      };
+      return closeModalHandler;
     }, [])
   );
+
+  function closeModalHandler() {
+    setShowModal(false);
+  }
+
+  function openModalHandler() {
+    setShowModal(true);
+  }
 
   return (
     <View style={[styles.screen, { backgroundColor: colors.background }]}>
       <Text style={[styles.title, { color: colors.text }]}>To-dos</Text>
-      <CustomBottomSheetModal
-        snapPoint={220}
-        ref={bottomSheetModalRef}
-        title="New To-Do"
-        dismissModal={dismissModalHandler}
-      >
-        <NewTodo />
-      </CustomBottomSheetModal>
+      {showModal && <NewTodo onClose={closeModalHandler} />}
       <AddButtton onPress={openModalHandler} />
     </View>
   );
