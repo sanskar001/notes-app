@@ -32,7 +32,7 @@ const TodoScreen: React.FC = () => {
     <View style={[styles.screen, { backgroundColor: colors.background }]}>
       <Text style={[styles.title, { color: colors.text }]}>To-dos</Text>
       <CustomBottomSheetModal
-        snapPoint={"25%"}
+        snapPoint={220}
         ref={bottomSheetModalRef}
         title="New To-Do"
         dismissModal={dismissModalHandler}
