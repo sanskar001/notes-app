@@ -3,7 +3,8 @@ import { View, Text, StyleSheet } from "react-native";
 import CustomBottomSheetModal from "@UI/CustomBottomSheetModal";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { useTheme } from "@/context/themeContext";
-import { Calendar, DateData } from "react-native-calendars";
+import CustomCalendar from "../UI/CustomCalendar";
+import { DateData } from "react-native-calendars";
 
 interface TodoReminderProps {
   onClose: () => void;
@@ -25,8 +26,9 @@ const TodoReminder: React.FC<TodoReminderProps> = ({ onClose }) => {
     onClose();
   };
 
-  const dayPressHandler = (date: DateData) => {
+  const daySelectHandler = (date: DateData) => {
     setSelectedDate(date.dateString);
+    console.log({ date });
   };
 
   return (
@@ -39,32 +41,10 @@ const TodoReminder: React.FC<TodoReminderProps> = ({ onClose }) => {
     >
       <View style={styles.reminderContainer}>
         <Text style={[styles.title, { color: colors.text }]}>Remind Me On</Text>
-        <View style={styles.calendar}>
-          <Calendar
-            onDayPress={dayPressHandler}
-            markedDates={{
-              [selectedDate]: {
-                selected: true,
-                disableTouchEvent: true,
-              },
-            }}
-            minDate={new Date().toDateString()}
-            enableSwipeMonths
-            disableAllTouchEventsForDisabledDays={true}
-            theme={{
-              calendarBackground: "transparent",
-              dayTextColor: colors.text,
-              monthTextColor: colors.text,
-              textDayFontFamily: "Inter_400",
-              textMonthFontFamily: "Inter_500",
-              todayTextColor: colors.notification,
-              todayBackgroundColor: colors.inputBackground,
-              textDisabledColor: colors.placeholderText,
-              selectedDayBackgroundColor: colors.notification,
-              selectedDayTextColor: colors.text,
-              textSectionTitleColor: colors.text,
-              arrowColor: colors.text,
-            }}
+        <View style={styles.dateTimeContainer}>
+          <CustomCalendar
+            onDaySelect={daySelectHandler}
+            selectedDate={selectedDate}
           />
         </View>
       </View>
@@ -81,7 +61,7 @@ const styles = StyleSheet.create({
     fontFamily: "Inter_500",
     paddingHorizontal: 16,
   },
-  calendar: {
+  dateTimeContainer: {
     marginTop: 16,
   },
 });
