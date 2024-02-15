@@ -1,10 +1,8 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useFocusEffect } from "@react-navigation/native";
 import { View, Text, StyleSheet } from "react-native";
-import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import AddButtton from "@UI/AddButtton";
-import CustomBottomSheetModal from "@UI/CustomBottomSheetModal";
-import NewTodo from "@components/Todo/NewTodo";
+import NewTodo, { Todo } from "@Todo/NewTodo";
 import { useTheme } from "@/context/themeContext";
 
 const TodoScreen: React.FC = () => {
@@ -25,10 +23,16 @@ const TodoScreen: React.FC = () => {
     setShowModal(true);
   }
 
+  function todoAddHandler(newTodo: Todo) {
+    console.log("Todo", newTodo);
+  }
+
   return (
     <View style={[styles.screen, { backgroundColor: colors.background }]}>
       <Text style={[styles.title, { color: colors.text }]}>To-dos</Text>
-      {showModal && <NewTodo onClose={closeModalHandler} />}
+      {showModal && (
+        <NewTodo onClose={closeModalHandler} onSubmit={todoAddHandler} />
+      )}
       <AddButtton onPress={openModalHandler} />
     </View>
   );

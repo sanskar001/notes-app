@@ -1,7 +1,7 @@
 import React from "react";
 import { useTheme } from "@/context/themeContext";
 import { BottomSheetTextInput } from "@gorhom/bottom-sheet";
-import { StyleSheet, KeyboardTypeOptions } from "react-native";
+import { StyleSheet, KeyboardTypeOptions, TextInput } from "react-native";
 
 interface InputProps {
   value: string;
@@ -11,31 +11,33 @@ interface InputProps {
   autoFocus?: boolean;
 }
 
-const Input: React.FC<InputProps> = ({
-  type = "default",
-  value,
-  placeholder,
-  onChange,
-  autoFocus = true,
-}) => {
-  const { colors } = useTheme();
+type Ref = any;
 
-  return (
-    <BottomSheetTextInput
-      keyboardType={type}
-      value={value}
-      placeholder={placeholder}
-      onChangeText={onChange}
-      autoFocus={autoFocus}
-      style={[
-        styles.input,
-        { backgroundColor: colors.inputBackground, color: colors.text },
-      ]}
-      placeholderTextColor={colors.placeholderText}
-      cursorColor={colors.notification}
-    />
-  );
-};
+const Input = React.forwardRef<Ref, InputProps>(
+  (
+    { type = "default", value, placeholder, onChange, autoFocus = true },
+    ref
+  ) => {
+    const { colors } = useTheme();
+
+    return (
+      <BottomSheetTextInput
+        ref={ref}
+        keyboardType={type}
+        value={value}
+        placeholder={placeholder}
+        onChangeText={onChange}
+        autoFocus={autoFocus}
+        style={[
+          styles.input,
+          { backgroundColor: colors.inputBackground, color: colors.text },
+        ]}
+        placeholderTextColor={colors.placeholderText}
+        cursorColor={colors.notification}
+      />
+    );
+  }
+);
 
 export default Input;
 

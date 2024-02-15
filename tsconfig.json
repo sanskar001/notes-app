@@ -6,7 +6,8 @@
     "paths": {
       "@/*": ["src/*"],
       "@components/*": ["src/components/*"],
-      "@UI/*": ["src/components/UI/*"]
+      "@UI/*": ["src/components/UI/*"],
+      "@Todo/*": ["src/components/Todo/*"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx"],

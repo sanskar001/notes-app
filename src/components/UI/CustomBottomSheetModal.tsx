@@ -57,8 +57,8 @@ const CustomBottomSheetModal = React.forwardRef<Ref, BottomSheetModalProps>(
     const submitHandler = () => {
       if (!disabledSubmitButton && onSubmit) {
         onSubmit();
+        dismissModal();
       }
-      dismissModal();
     };
 
     return (
