@@ -4,6 +4,7 @@ import { View, Text, StyleSheet } from "react-native";
 import AddButtton from "@UI/AddButtton";
 import NewTodo, { Todo } from "@Todo/NewTodo";
 import { useTheme } from "@/context/themeContext";
+import CustomTimePicker from "@UI/CustomTimePicker";
 
 const TodoScreen: React.FC = () => {
   const { colors } = useTheme();
@@ -33,6 +34,9 @@ const TodoScreen: React.FC = () => {
       {showModal && (
         <NewTodo onClose={closeModalHandler} onSubmit={todoAddHandler} />
       )}
+      <View style={{ marginTop: 20 }}>
+        <CustomTimePicker />
+      </View>
       <AddButtton onPress={openModalHandler} />
     </View>
   );
