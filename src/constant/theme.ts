@@ -5,6 +5,7 @@ export type CustomTheme = Theme & {
   colors: {
     inputBackground: string;
     placeholderText: string;
+    highlight: string;
   };
 };
 
@@ -19,6 +20,7 @@ export const darkTheme: CustomTheme = {
     notification: colors.primary,
     inputBackground: colors.buildingGray,
     placeholderText: colors.smokePearl,
+    highlight: colors.smokePearl,
   },
 };
 
@@ -33,6 +35,7 @@ export const lightTheme: CustomTheme = {
     notification: colors.primary,
     inputBackground: colors.white,
     placeholderText: colors.silverback,
+    highlight: colors.white,
   },
 };
 

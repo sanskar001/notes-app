@@ -3,8 +3,9 @@ import { View, Text, StyleSheet } from "react-native";
 import CustomBottomSheetModal from "@UI/CustomBottomSheetModal";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { useTheme } from "@/context/themeContext";
-import CustomCalendar from "../UI/CustomCalendar";
+import CustomCalendar from "@UI/CustomCalendar";
 import { DateData } from "react-native-calendars";
+import TimePicker, { Time } from "@UI/TimePicker";
 
 interface TodoReminderProps {
   onClose: () => void;
@@ -13,7 +14,11 @@ interface TodoReminderProps {
 const TodoReminder: React.FC<TodoReminderProps> = ({ onClose }) => {
   const { colors } = useTheme();
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
-  const [selectedDate, setSelectedDate] = useState<string>("");
+  const [date, setDate] = useState<string>("2024-02-17");
+  const [time, setTime] = useState<Time>({
+    hour: "12",
+    min: "30",
+  });
 
   useEffect(() => {
     bottomSheetModalRef.current?.present();
@@ -27,13 +32,16 @@ const TodoReminder: React.FC<TodoReminderProps> = ({ onClose }) => {
   };
 
   const daySelectHandler = (date: DateData) => {
-    setSelectedDate(date.dateString);
-    console.log({ date });
+    setDate(date.dateString);
+  };
+
+  const timeSelectHandler = (time: Time) => {
+    setTime(time);
   };
 
   return (
     <CustomBottomSheetModal
-      snapPoint={"75%"}
+      snapPoint={"90%"}
       title="Schedule reminder"
       ref={bottomSheetModalRef}
       dismissModal={dismissModalHandler}
@@ -41,11 +49,16 @@ const TodoReminder: React.FC<TodoReminderProps> = ({ onClose }) => {
     >
       <View style={styles.reminderContainer}>
         <Text style={[styles.title, { color: colors.text }]}>Remind Me On</Text>
+        <View>
+          <Text style={{ color: colors.notification }}>
+            {date} {time.hour}:{time.min}
+          </Text>
+        </View>
         <View style={styles.dateTimeContainer}>
-          <CustomCalendar
-            onDaySelect={daySelectHandler}
-            selectedDate={selectedDate}
-          />
+          <CustomCalendar onDaySelect={daySelectHandler} selectedDate={date} />
+          <View style={styles.timePickerContainer}>
+            <TimePicker selectedTime={time} onSelect={timeSelectHandler} />
+          </View>
         </View>
       </View>
     </CustomBottomSheetModal>
@@ -63,5 +76,8 @@ const styles = StyleSheet.create({
   },
   dateTimeContainer: {
     marginTop: 16,
+  },
+  timePickerContainer: {
+    paddingHorizontal: 16,
   },
 });

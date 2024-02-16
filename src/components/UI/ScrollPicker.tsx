@@ -1,36 +1,40 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import IconButton from "@UI/IconButton";
 import { useTheme } from "@/context/themeContext";
+import { colors } from "@/constant/colors";
 
-interface CustomTimePickerProps {}
+interface ScrollPickerProps {
+  itemList: Array<string>;
+  value: string;
+  label?: string;
+  onSelect: (value: string) => void;
+}
 
-const sampleArr = [
-  "00",
-  "01",
-  "02",
-  "03",
-  "04",
-  "05",
-  "06",
-  "07",
-  "08",
-  "09",
-  "00",
-  "01",
-  "02",
-];
 const ITEM_HEIGHT = 40; // px
 const VISIBLE_ITEM_LENGTH = 3;
 
-const CustomTimePicker: React.FC<CustomTimePickerProps> = ({}) => {
+const ScrollPicker: React.FC<ScrollPickerProps> = ({
+  itemList,
+  value,
+  onSelect,
+  label,
+}) => {
   const { colors } = useTheme();
-  const scrollIndex = useRef<number>(0);
+  const scrollIndex = useRef<number>(itemList.indexOf(value) - 1);
   const scrollViewRef = useRef<ScrollView>(null);
+
+  useEffect(() => {
+    scrollIndex.current = itemList.indexOf(value) - 1;
+    scrollViewRef.current?.scrollTo({
+      y: ITEM_HEIGHT * scrollIndex.current,
+      animated: false,
+    });
+  }, []);
 
   const upPressHandler = () => {
     if (scrollIndex.current <= 0) {
-      scrollIndex.current = sampleArr.length - VISIBLE_ITEM_LENGTH;
+      scrollIndex.current = itemList.length - VISIBLE_ITEM_LENGTH;
       scrollViewRef.current?.scrollTo({
         y: ITEM_HEIGHT * scrollIndex.current,
         animated: false,
@@ -43,14 +47,11 @@ const CustomTimePicker: React.FC<CustomTimePickerProps> = ({}) => {
       animated: true,
     });
 
-    console.log({
-      index: scrollIndex.current,
-      value: sampleArr[scrollIndex.current + 1],
-    });
+    onSelect(itemList[scrollIndex.current + 1]);
   };
 
   const downPressHandler = () => {
-    if (scrollIndex.current >= sampleArr.length - VISIBLE_ITEM_LENGTH) {
+    if (scrollIndex.current >= itemList.length - VISIBLE_ITEM_LENGTH) {
       scrollIndex.current = 0;
       scrollViewRef.current?.scrollTo({
         y: ITEM_HEIGHT * scrollIndex.current,
@@ -64,10 +65,7 @@ const CustomTimePicker: React.FC<CustomTimePickerProps> = ({}) => {
       animated: true,
     });
 
-    console.log({
-      index: scrollIndex.current,
-      value: sampleArr[scrollIndex.current + 1],
-    });
+    onSelect(itemList[scrollIndex.current + 1]);
   };
 
   return (
@@ -81,21 +79,34 @@ const CustomTimePicker: React.FC<CustomTimePickerProps> = ({}) => {
       <View style={styles.scrollbar}>
         <ScrollView
           ref={scrollViewRef}
-          snapToInterval={28}
+          snapToInterval={ITEM_HEIGHT}
           showsVerticalScrollIndicator={false}
           scrollEnabled={false}
         >
-          {sampleArr.map((item, index) => {
+          {itemList.map((item, index) => {
             return (
-              <Text key={index} style={[styles.item, { color: colors.text }]}>
-                {item}
+              <Text
+                key={index}
+                style={[
+                  styles.item,
+                  value === item
+                    ? {
+                        color: colors.notification,
+                        ...styles.selectedItem,
+                      }
+                    : null,
+                ]}
+              >
+                {item}{" "}
+                {label && (
+                  <Text style={styles.label}>
+                    {value === item ? label : ""}
+                  </Text>
+                )}
               </Text>
             );
           })}
         </ScrollView>
-        <View
-          style={[styles.overlay, { backgroundColor: colors.inputBackground }]}
-        ></View>
       </View>
       <IconButton
         name="chevron-down-outline"
@@ -107,7 +118,7 @@ const CustomTimePicker: React.FC<CustomTimePickerProps> = ({}) => {
   );
 };
 
-export default CustomTimePicker;
+export default ScrollPicker;
 
 const styles = StyleSheet.create({
   scrollPicker: {
@@ -116,23 +127,19 @@ const styles = StyleSheet.create({
   scrollbar: {
     height: ITEM_HEIGHT * 3,
     alignItems: "center",
-    position: "relative",
-  },
-  overlay: {
-    height: ITEM_HEIGHT,
-    width: "100%",
-    position: "absolute",
-    top: "50%",
-    opacity: 0.5,
-    zIndex: -1,
-    transform: [{ translateY: -(ITEM_HEIGHT / 2) }],
-    borderRadius: 16,
   },
   item: {
     fontSize: 16,
     lineHeight: ITEM_HEIGHT,
+    textAlign: "center",
+    color: colors.smokePearl,
   },
   selectedItem: {
-    fontFamily: "Inter_600",
+    fontFamily: "Inter_500",
+    fontSize: 18,
+  },
+  label: {
+    fontSize: 12,
+    fontFamily: "Inter_400",
   },
 });

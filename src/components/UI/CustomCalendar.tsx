@@ -33,7 +33,7 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({
         textDayFontFamily: "Inter_400",
         textMonthFontFamily: "Inter_500",
         todayTextColor: colors.notification,
-        todayBackgroundColor: colors.inputBackground,
+        todayBackgroundColor: colors.highlight,
         textDisabledColor: colors.placeholderText,
         selectedDayBackgroundColor: colors.notification,
         selectedDayTextColor: colors.text,
