@@ -22,7 +22,7 @@ interface TodoReminderProps {
 }
 
 const TODAY: string = new Date().toISOString().split("T")[0];
-const NOON: Time = { hour: "12", min: "00" };
+const NOON: Time = { hour: "12", min: "30" };
 
 const TodoReminder: React.FC<TodoReminderProps> = ({
   selectedReminder,

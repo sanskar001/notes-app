@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { View, StyleSheet } from "react-native";
+import { useTheme } from "@/context/themeContext";
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import Chip from "@UI/Chip";
 import Input from "@UI/Input";
 import IconButton from "@UI/IconButton";
-import { useTheme } from "@/context/themeContext";
-import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import CustomBottomSheetModal from "@UI/CustomBottomSheetModal";
 import TodoReminder, { Datetime } from "./TodoReminder";
 import {
@@ -16,7 +16,7 @@ export interface Todo {
   id: string;
   text: string;
   isDone: boolean;
-  reminderTime?: Date;
+  reminderTime: Date | null;
 }
 
 interface NewTodoProps {
@@ -51,9 +51,7 @@ const NewTodo: React.FC<NewTodoProps> = ({ onClose, onSubmit }) => {
       id: "todo_" + new Date().getTime(),
       text: todo,
       isDone: false,
-      reminderTime: reminder
-        ? new Date(getDatetimeString(reminder))
-        : undefined,
+      reminderTime: reminder && new Date(getDatetimeString(reminder)),
     };
 
     onSubmit(newTodo);

@@ -1,7 +1,7 @@
 import React from "react";
 import { useTheme } from "@/context/themeContext";
 import { BottomSheetTextInput } from "@gorhom/bottom-sheet";
-import { StyleSheet, KeyboardTypeOptions, TextInput } from "react-native";
+import { StyleSheet, KeyboardTypeOptions } from "react-native";
 
 interface InputProps {
   value: string;
