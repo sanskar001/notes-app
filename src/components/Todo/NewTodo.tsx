@@ -1,11 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import { View, StyleSheet } from "react-native";
+import Chip from "@UI/Chip";
 import Input from "@UI/Input";
 import IconButton from "@UI/IconButton";
 import { useTheme } from "@/context/themeContext";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import CustomBottomSheetModal from "@UI/CustomBottomSheetModal";
-import TodoReminder from "./TodoReminder";
+import TodoReminder, { Datetime } from "./TodoReminder";
+import { getFormattedDatetime } from "@/utils/getFormattedDatetime";
 
 export interface Todo {
   id: string;
@@ -24,11 +26,11 @@ const NewTodo: React.FC<NewTodoProps> = ({ onClose, onSubmit }) => {
   const inputRef = useRef<any>(null);
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const [todo, setTodo] = useState<string>("");
+  const [reminder, setReminder] = useState<Datetime | null>(null);
   const [showReminderModal, setShowReminderModal] = useState<boolean>(false);
 
   useEffect(() => {
     bottomSheetModalRef.current?.present();
-
     return dismissModalHandler;
   }, []);
 
@@ -51,15 +53,19 @@ const NewTodo: React.FC<NewTodoProps> = ({ onClose, onSubmit }) => {
     onSubmit(newTodo);
   };
 
-  function closeModalHandler() {
+  const closeModalHandler = () => {
     setShowReminderModal(false);
     inputRef.current?.focus();
-  }
+  };
 
-  function openModalHandler() {
+  const openModalHandler = () => {
     setShowReminderModal(true);
     inputRef.current?.blur();
-  }
+  };
+
+  const addReminderHandler = (reminder: Datetime) => {
+    setReminder(reminder);
+  };
 
   return (
     <CustomBottomSheetModal
@@ -79,13 +85,26 @@ const NewTodo: React.FC<NewTodoProps> = ({ onClose, onSubmit }) => {
           onChange={todoChangeHandler}
         />
         <View style={styles.reminderContainer}>
-          <IconButton
-            name="notifications-outline"
-            size={20}
-            color={colors.text}
-            onPress={openModalHandler}
-          />
-          {showReminderModal && <TodoReminder onClose={closeModalHandler} />}
+          {!reminder ? (
+            <IconButton
+              name="notifications-outline"
+              size={20}
+              color={colors.text}
+              onPress={openModalHandler}
+            />
+          ) : (
+            <Chip
+              label={getFormattedDatetime(reminder)}
+              onPress={openModalHandler}
+              onCancel={setReminder.bind(null, null)}
+            />
+          )}
+          {showReminderModal && (
+            <TodoReminder
+              onClose={closeModalHandler}
+              onAddReminder={addReminderHandler}
+            />
+          )}
         </View>
       </View>
     </CustomBottomSheetModal>

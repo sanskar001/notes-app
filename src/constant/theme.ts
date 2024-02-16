@@ -6,6 +6,10 @@ export type CustomTheme = Theme & {
     inputBackground: string;
     placeholderText: string;
     highlight: string;
+    activeTabBackground: string;
+    activeTabText: string;
+    tabBackground: string;
+    tabText: string;
   };
 };
 
@@ -21,6 +25,10 @@ export const darkTheme: CustomTheme = {
     inputBackground: colors.buildingGray,
     placeholderText: colors.smokePearl,
     highlight: colors.smokePearl,
+    activeTabBackground: colors.paperWhite,
+    activeTabText: colors.buildingGray,
+    tabBackground: colors.buildingGray,
+    tabText: colors.white,
   },
 };
 
@@ -36,6 +44,10 @@ export const lightTheme: CustomTheme = {
     inputBackground: colors.white,
     placeholderText: colors.silverback,
     highlight: colors.white,
+    activeTabBackground: colors.gray,
+    activeTabText: colors.white,
+    tabBackground: colors.steam,
+    tabText: colors.black,
   },
 };
 

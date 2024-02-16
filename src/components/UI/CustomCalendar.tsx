@@ -1,5 +1,5 @@
-import { useTheme } from "@/context/themeContext";
 import React from "react";
+import { useTheme } from "@/context/themeContext";
 import { StyleSheet } from "react-native";
 import { Calendar, DateData } from "react-native-calendars";
 
@@ -18,6 +18,7 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({
     <Calendar
       onDayPress={onDaySelect}
       enableSwipeMonths
+      initialDate={selectedDate}
       markedDates={{
         [selectedDate]: {
           selected: true,
