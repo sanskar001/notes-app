@@ -8,3 +8,12 @@ export const getFormattedDatetime = (datetime: Datetime) => {
 
   return `${new Date(date).toLocaleDateString("en-IN")}, ${hour}:${min}`;
 };
+
+export const getDatetimeString = (datetime: Datetime): string => {
+  const {
+    date,
+    time: { hour, min },
+  } = datetime;
+
+  return `${date} ${hour}:${min}`;
+};

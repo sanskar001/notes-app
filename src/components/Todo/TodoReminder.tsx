@@ -16,18 +16,23 @@ export interface Datetime {
 }
 
 interface TodoReminderProps {
+  selectedReminder: Datetime | null;
   onClose: () => void;
   onAddReminder: (datetime: Datetime) => void;
 }
 
+const TODAY: string = new Date().toISOString().split("T")[0];
+const NOON: Time = { hour: "12", min: "00" };
+
 const TodoReminder: React.FC<TodoReminderProps> = ({
+  selectedReminder,
   onClose,
   onAddReminder,
 }) => {
   const { colors } = useTheme();
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
-  const [date, setDate] = useState<string>("2024-02-17");
-  const [time, setTime] = useState<Time>({ hour: "12", min: "30" });
+  const [date, setDate] = useState<string>(selectedReminder?.date || TODAY);
+  const [time, setTime] = useState<Time>(selectedReminder?.time || NOON);
   const [activeTab, setActiveTab] = useState<ReminderTabs>("date");
 
   useEffect(() => {

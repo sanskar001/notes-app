@@ -7,13 +7,16 @@ import { useTheme } from "@/context/themeContext";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import CustomBottomSheetModal from "@UI/CustomBottomSheetModal";
 import TodoReminder, { Datetime } from "./TodoReminder";
-import { getFormattedDatetime } from "@/utils/getFormattedDatetime";
+import {
+  getDatetimeString,
+  getFormattedDatetime,
+} from "@/utils/getFormattedDatetime";
 
 export interface Todo {
   id: string;
   text: string;
   isDone: boolean;
-  reminderTime?: number | string;
+  reminderTime?: Date;
 }
 
 interface NewTodoProps {
@@ -48,6 +51,9 @@ const NewTodo: React.FC<NewTodoProps> = ({ onClose, onSubmit }) => {
       id: "todo_" + new Date().getTime(),
       text: todo,
       isDone: false,
+      reminderTime: reminder
+        ? new Date(getDatetimeString(reminder))
+        : undefined,
     };
 
     onSubmit(newTodo);
@@ -101,6 +107,7 @@ const NewTodo: React.FC<NewTodoProps> = ({ onClose, onSubmit }) => {
           )}
           {showReminderModal && (
             <TodoReminder
+              selectedReminder={reminder}
               onClose={closeModalHandler}
               onAddReminder={addReminderHandler}
             />
